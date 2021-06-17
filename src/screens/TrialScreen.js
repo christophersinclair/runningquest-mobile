@@ -3,7 +3,7 @@ import { Button, View, Text, StyleSheet, Image } from 'react-native';
 import { useFonts } from 'expo-font';
 
 
-const ProfileScreen = ( {navigation, route} ) => {
+const TrialScreen = ( {navigation, route} ) => {
   const [loaded] = useFonts({
     OldLondon: require('../../assets/fonts/OldLondon.ttf'),
   });
@@ -11,17 +11,17 @@ const ProfileScreen = ( {navigation, route} ) => {
   if (!loaded) {
     return null;
   }
-  const parameters = route.params;
+  const quest = route.params.quest;
   return (
     <View style={styles.mainView}>
       <Image source={require('../../assets/images/BG.png')} style={styles.backgroundImage} />
       <View style={styles.overlay}>
-      <Text style={{fontFamily: 'OldLondon'}}>Profile</Text>
+      <Text style={{fontSize: 30, fontFamily: 'OldLondon'}}>Trials</Text>
+      <Text style={{fontSize: 15, fontFamily: 'OldLondon'}}>Retrieving Trials for Quest {quest.id}</Text>
         <Button
-          title="More Profile Details"
-          onPress={() => { 
-            navigation.navigate("Profile_to_Profile")}}/>
-    </View>
+          title="Home"
+          onPress={() => { navigation.popToTop() }}/>
+      </View>
     </View>
   )
 };
@@ -44,4 +44,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProfileScreen;
+export default TrialScreen;

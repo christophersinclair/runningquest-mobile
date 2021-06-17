@@ -3,25 +3,25 @@ import { Button, View, Text, StyleSheet, Image } from 'react-native';
 import { useFonts } from 'expo-font';
 
 
-const ProfileScreen = ( {navigation, route} ) => {
-  const [loaded] = useFonts({
-    OldLondon: require('../../assets/fonts/OldLondon.ttf'),
-  });
-
-  if (!loaded) {
-    return null;
-  }
+const SettingsScreen = ( {navigation, route} ) => {
+    const [loaded] = useFonts({
+        OldLondon: require('../../assets/fonts/OldLondon.ttf'),
+      });
+    
+      if (!loaded) {
+        return null;
+      }
   const parameters = route.params;
   return (
     <View style={styles.mainView}>
       <Image source={require('../../assets/images/BG.png')} style={styles.backgroundImage} />
       <View style={styles.overlay}>
-      <Text style={{fontFamily: 'OldLondon'}}>Profile</Text>
+      <Text style={{fontFamily: 'OldLondon'}}>Settings</Text>
         <Button
-          title="More Profile Details"
+          title="More Settings Details"
           onPress={() => { 
-            navigation.navigate("Profile_to_Profile")}}/>
-    </View>
+            navigation.navigate("Settings_to_Settings")}}/>
+      </View>
     </View>
   )
 };
@@ -44,4 +44,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProfileScreen;
+export default SettingsScreen;
