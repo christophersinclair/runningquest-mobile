@@ -1,9 +1,38 @@
 import React from 'react';
 import { Button, View, Text, StyleSheet, Image, TouchableOpacity, ImageBackground } from 'react-native';
 import { useFonts } from 'expo-font';
+import { openDatabase } from 'expo-sqlite';
+import { useEffect } from 'react/cjs/react.development';
+import { setStatusBarNetworkActivityIndicatorVisible } from 'expo-status-bar';
 
+const db = openDatabase("runningquest")
+const addDataToDb = () => {
+    db.transaction(tx => {
+        
+        tx.executeSql(
+            "CREATE TABLE IF NOT EXISTS User (id INT, username TEXT, password TEXT, email TEXT, avatar_id TEXT, PRIMARY KEY ( id ));",
+            []
+        );
+        tx.executeSql(
+            "INSERT INTO User (id, username, password, email, avatar_id) VALUES (1, 'dummy', 'realdumb', 'dummy@runningquest.io', '1234');",
+            []
+        );
+        tx.executeSql(
+            "select * from User",
+            [],
+            (_, { rows: { _array } }) => console.log(_array),
+            () => console.log("error fetching")
+        );
+
+    });
+};
+
+addDataToDb();
 
 const HomeScreen = ( {navigation, route} ) => {
+
+    
+
     const [loaded] = useFonts({
         OldLondon: require('../../assets/fonts/OldLondon.ttf'),
       });
@@ -17,7 +46,7 @@ const HomeScreen = ( {navigation, route} ) => {
       <View style={styles.overlay}>
         <Image source={require('../../assets/images/knight-idle.gif')} />
         <View style={{ flexDirection:"row" }}>
-            <View style={{padding: 25}}>
+            <View style={{padding: 8}}>
                 <TouchableOpacity
                     style={styles.yellowButton}
                     onPress={() => { 
@@ -30,7 +59,7 @@ const HomeScreen = ( {navigation, route} ) => {
                 </ImageBackground>
                 </TouchableOpacity>
             </View>
-            <View style={{padding: 25}}>
+            <View style={{padding: 8}}>
                 <TouchableOpacity
                     style={styles.yellowButton}
                     onPress={() => { 
@@ -43,7 +72,7 @@ const HomeScreen = ( {navigation, route} ) => {
                 </ImageBackground>
                 </TouchableOpacity>
             </View>
-            <View style={{padding: 25}}>
+            <View style={{padding: 8}}>
                 <TouchableOpacity
                     style={styles.yellowButton}
                     onPress={() => { 
@@ -80,7 +109,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent'
   },
   yellowButton: {
-      color: 'crimson',
+      color: 'black',
       fontSize: 25,
       fontFamily: 'OldLondon'
   },
@@ -89,7 +118,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     resizeMode: "cover",
     height: 100,
-    width: 80
+    width: 115
   },
 });
 

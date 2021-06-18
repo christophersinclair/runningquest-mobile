@@ -16,11 +16,6 @@ const SettingsScreen = ( {navigation, route} ) => {
     <View style={styles.mainView}>
       <Image source={require('../../assets/images/BG.png')} style={styles.backgroundImage} />
       <View style={styles.overlay}>
-      <Text style={{fontFamily: 'OldLondon'}}>Settings</Text>
-        <Button
-          title="More Settings Details"
-          onPress={() => { 
-            navigation.navigate("Settings_to_Settings")}}/>
       </View>
     </View>
   )

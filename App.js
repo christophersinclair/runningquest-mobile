@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -11,18 +11,47 @@ import QuestScreen from './src/screens/QuestScreen';
 import TrialScreen from './src/screens/TrialScreen';
 import SettingsScreen from './src/screens/SettingsScreen';
 
-import { useFonts } from 'expo-font';
-
+import * as Font from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
+import { useEffect } from 'react/cjs/react.development';
+import { useCallback, useState } from 'react';
 
 const Stack = createStackNavigator();
 export default function App() {
-  const [loaded] = useFonts({
-    OldLondon: require('./assets/fonts/OldLondon.ttf'),
-  });
+  
+  
+  const [loaded] = Font.useFonts({ OldLondon: require('./assets/fonts/OldLondon.ttf')});
 
   if (!loaded) {
     return null;
   }
+
+  // const [appIsReady, setAppIsReady] = useState(false);
+  // useEffect(() => {
+  //   async function prepare() {
+  //     try {
+  //       // Keep the splash screen visible while we fetch resources
+  //       await SplashScreen.preventAutoHideAsync();
+  //     } catch (e) {
+  //       console.warn(e);
+  //     } finally {
+  //       // Tell the application to render
+  //       setAppIsReady(true);
+  //     }
+  //   }
+
+  //   prepare();
+  // }, []);
+
+  // const onLayoutRootView = useCallback(async () => {
+  //   if (appIsReady) {
+  //     await SplashScreen.hideAsync();
+  //   }
+  // }, [appIsReady]);
+
+  // if (!appIsReady && !loaded) {
+  //   return null;
+  // }
 
   return (
     <NavigationContainer>

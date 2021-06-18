@@ -16,11 +16,6 @@ const ProfileScreen = ( {navigation, route} ) => {
     <View style={styles.mainView}>
       <Image source={require('../../assets/images/BG.png')} style={styles.backgroundImage} />
       <View style={styles.overlay}>
-      <Text style={{fontFamily: 'OldLondon'}}>Profile</Text>
-        <Button
-          title="More Profile Details"
-          onPress={() => { 
-            navigation.navigate("Profile_to_Profile")}}/>
     </View>
     </View>
   )
